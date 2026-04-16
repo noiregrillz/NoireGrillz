@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noire Grillz — Internal Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   NOIRE GRILLZ — INTERNAL REFERENCE SITE
+   Dark luxury meets editorial boldness
+═══════════════════════════════════════════ */
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-pale: #F5E4A8;
+  --gold-dim: #7a6330;
+  --gold-glow: rgba(201,168,76,0.12);
+  --gold-glow2: rgba(201,168,76,0.06);
+  --black: #060606;
+  --ink: #0d0d0d;
+  --surface: #111111;
+  --surface2: #181818;
+  --surface3: #1f1f1f;
+  --border: #242424;
+  --border2: #2e2e2e;
+  --text: #e8e4dc;
+  --text2: #b0a898;
+  --muted: #5a5550;
+  --white: #f5f2ec;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Barlow Condensed', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Grain texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── NAVIGATION ─────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(6,6,6,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 8px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  border-left: 1px solid var(--border);
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links li:last-child a { border-right: 1px solid var(--border); }
+
+/* ─── HERO ───────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.03) 0%, transparent 50%),
+    linear-gradient(180deg, #060606 0%, #0a0906 100%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 140px);
+  line-height: 0.9;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.hero-title .line1 { color: var(--white); display: block; }
+.hero-title .line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-pale) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text2);
+  margin-bottom: 40px;
+  max-width: 500px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.stat {
+  border-left: 2px solid var(--gold-dim);
+  padding-left: 16px;
+}
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.2s forwards;
+}
+
+.hero-scroll span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+}
+
+.scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold-dim);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.5; }
+  50% { transform: scaleX(1.3); opacity: 1; }
+}
+
+/* ─── SECTION WRAPPER ────────────────────── */
+section {
+  padding: 100px 40px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.section-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 1;
+  color: rgba(201,168,76,0.08);
+  letter-spacing: 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.section-title-wrap { flex: 1; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 6vw, 56px);
+  letter-spacing: 3px;
+  color: var(--white);
+  line-height: 1;
+}
+
+/* ─── WORKFLOW SECTION ───────────────────── */
+#workflow { background: var(--ink); }
+
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.workflow-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.workflow-step:hover { background: rgba(201,168,76,0.02); }
+.workflow-step:first-child { border-top: 1px solid var(--border); }
+
+.step-num-col {
+  padding: 28px 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--gold);
+  background: var(--surface);
+  flex-shrink: 0;
+  transition: all 0.2s;
+  z-index: 1;
+}
+
+.workflow-step:hover .step-circle {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+.step-line {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+
+.workflow-step:last-child .step-line { display: none; }
+
+.step-body {
+  padding: 24px 24px 24px 28px;
+}
+
+.step-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+}
+
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.step-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.step-detail.open { max-height: 500px; }
+
+.step-detail-inner {
+  padding: 16px 0 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step-tip {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.step-tip::before {
+  content: '→';
+  color: var(--gold-dim);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.step-tip span {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.step-toggle {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform 0.3s, color 0.2s;
+  padding: 24px 24px 24px 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.workflow-step.open .step-toggle {
+  transform: rotate(45deg);
+  color: var(--gold);
+}
+
+/* ─── EQUIPMENT SECTION ──────────────────── */
+#equipment { background: var(--black); }
+
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.gear-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.gear-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gear-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.gear-card:hover::before { opacity: 1; }
+
+.gear-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.status-have { background: rgba(46,125,50,0.15); color: #66bb6a; border: 1px solid rgba(46,125,50,0.3); }
+.status-buy { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+.status-soon { background: rgba(149,117,205,0.12); color: #b39ddb; border: 1px solid rgba(149,117,205,0.25); }
+.status-download { background: rgba(41,182,246,0.1); color: #4fc3f7; border: 1px solid rgba(41,182,246,0.2); }
+
+.gear-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.gear-cost {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.gear-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── SCHEDULE SECTION ───────────────────── */
+#schedule { background: var(--ink); }
+
+.week-nav {
+  display: flex;
+  gap: 0;
+  margin-bottom: 48px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.week-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 16px 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.week-btn:last-child { border-right: none; }
+
+.week-btn:hover { background: var(--surface2); }
+
+.week-btn.active { background: var(--surface2); }
+
+.week-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.wb1.active::after { background: #4a9eff; }
+.wb2.active::after { background: #ff7b4a; }
+.wb3.active::after { background: #a855f7; }
+.wb4.active::after { background: var(--gold); }
+
+.week-btn-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  display: block;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.wb1.active .week-btn-num { color: #4a9eff; }
+.wb2.active .week-btn-num { color: #ff7b4a; }
+.wb3.active .week-btn-num { color: #a855f7; }
+.wb4.active .week-btn-num { color: var(--gold); }
+
+.week-btn-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.week-panel { display: none; }
+.week-panel.active { display: block; }
+
+.week-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.week-goal-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.w1 .week-goal-badge { background: rgba(74,158,255,0.1); color: #4a9eff; border: 1px solid rgba(74,158,255,0.2); }
+.w2 .week-goal-badge { background: rgba(255,123,74,0.1); color: #ff7b4a; border: 1px solid rgba(255,123,74,0.2); }
+.w3 .week-goal-badge { background: rgba(168,85,247,0.1); color: #a855f7; border: 1px solid rgba(168,85,247,0.2); }
+.w4 .week-goal-badge { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+
+.week-intro-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.week-intro-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.days-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.day-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.day-row:hover { border-color: var(--border2); }
+
+.day-row-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+}
+
+.day-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.w1 .day-pip { background: #4a9eff; }
+.w2 .day-pip { background: #ff7b4a; }
+.w3 .day-pip { background: #a855f7; }
+.w4 .day-pip { background: var(--gold); }
+
+.day-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.day-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--text);
+  flex: 1;
+}
+
+.day-focus {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.day-chevron {
+  font-size: 14px;
+  color: var(--muted);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.day-row.open .day-chevron { transform: rotate(180deg); color: var(--gold); }
+
+.day-row-body {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 16px 18px 18px;
+}
+
+.day-row.open .day-row-body { display: block; }
+
+.session-block { margin-bottom: 14px; }
+.session-block:last-child { margin-bottom: 0; }
+
+.session-time-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-dim);
+  margin-bottom: 4px;
+}
+
+.session-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.session-text {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+.session-tips-block {
+  margin-top: 8px;
+  background: var(--surface2);
+  border-radius: 6px;
+  padding: 10px 14px;
+  border-left: 2px solid var(--gold-dim);
+}
+
+.session-tips-block p {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #6a6058;
+  line-height: 1.7;
+}
+
+.session-tips-block p::before { content: '→ '; color: var(--gold-dim); }
+
+.session-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+
+/* ─── BUSINESS SECTION ───────────────────── */
+#business { background: var(--black); }
+
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.biz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.biz-card-num {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: rgba(201,168,76,0.06);
+  line-height: 1;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+.biz-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.biz-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.biz-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.biz-list li {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.biz-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold-dim);
+  font-size: 12px;
+}
+
+/* ─── ROADMAP SECTION ────────────────────── */
+#roadmap {
+  background: var(--ink);
+  padding-bottom: 120px;
+}
+
+.roadmap-phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.phase-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.phase-header {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.phase-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.phase-1 .phase-label { color: #4a9eff; }
+.phase-2 .phase-label { color: #ff7b4a; }
+.phase-3 .phase-label { color: var(--gold); }
+
+.phase-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.phase-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.phase-body {
+  padding: 18px 22px;
+  background: var(--surface);
+}
+
+.phase-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+
+.phase-item:last-child { margin-bottom: 0; }
+
+.phase-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.phase-1 .phase-dot { background: #4a9eff; }
+.phase-2 .phase-dot { background: #ff7b4a; }
+.phase-3 .phase-dot { background: var(--gold); }
+
+.phase-item span {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: gap;
+  gap: 20px;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.footer-mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+/* ─── ANIMATIONS ─────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── MOBILE ─────────────────────────────── */
+@media (max-width: 700px) {
+  nav { padding: 0 16px; }
+  .nav-links a { padding: 8px 10px; font-size: 9px; letter-spacing: 1px; }
+  #hero { padding: 80px 20px 60px; }
+  section { padding: 70px 20px; }
+  .section-number { font-size: 50px; }
+  .hero-stats { gap: 24px; }
+  footer { padding: 32px 20px; flex-direction: column; }
+  .step-body { padding: 16px 14px 16px 20px; }
+  .week-btn-label { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">NOIRE GRILLZ</div>
+  <ul class="nav-links">
+    <li><a href="#hero">HOME</a></li>
+    <li><a href="#workflow">WORKFLOW</a></li>
+    <li><a href="#equipment">GEAR</a></li>
+    <li><a href="#schedule">SCHEDULE</a></li>
+    <li><a href="#business">BUSINESS</a></li>
+    <li><a href="#roadmap">ROADMAP</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">INTERNAL REFERENCE — MASTER WORKFLOW</p>
+    <h1 class="hero-title">
+      <span class="line1">NOIRE</span>
+      <span class="line2">GRILLZ</span>
+    </h1>
+    <p class="hero-sub">From impression to gold — the complete production system.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">9</div>
+        <div class="stat-label">PRODUCTION STEPS</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">WEEK SCHEDULE</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">28</div>
+        <div class="stat-label">PRACTICE DAYS</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">THE VISION</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>SCROLL TO EXPLORE</span>
+  </div>
+</section>
+
+<!-- ═══ WORKFLOW ═══ -->
+<section id="workflow">
+  <div class="section-header reveal">
+    <div class="section-number">02</div>
+    <div class="section-title-wrap">
+      <div class="section-label">PRODUCTION SYSTEM</div>
+      <h2 class="section-title">FULL WORKFLOW</h2>
+    </div>
+  </div>
+
+  <div class="workflow-steps reveal">
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">CLIENT INTAKE</div>
+        <div class="step-title">CLIENT ORDER</div>
+        <div class="step-desc">Client fills out Noire Grillz order form. Collect metal choice, design options, teeth count, custom details. Non-refundable 50% deposit upfront.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Collect via Cash App, Zelle, or Square — set up before first order</span></div>
+            <div class="step-tip"><span>Add phone number to order form for client communication</span></div>
+            <div class="step-tip"><span>Ask client to send reference photos / inspo before starting</span></div>
+            <div class="step-tip"><span>Confirm metal karat, style, teeth count before ANY work begins</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">PHYSICAL PROCESS</div>
+        <div class="step-title">DENTAL IMPRESSION</div>
+        <div class="step-desc">Client bites into alginate impression material. Hold 2–3 min without moving. Pour dental stone immediately — alginate distorts when dry. Cure 45–60 min.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Mix alginate to thick paste consistency — too thin and it won't hold shape</span></div>
+            <div class="step-tip"><span>Client must not move during bite — one shift ruins the entire mold</span></div>
+            <div class="step-tip"><span>Remove impression in one clean pull — no wiggling or rocking</span></div>
+            <div class="step-tip"><span>Pour dental stone IMMEDIATELY — alginate distorts fast when exposed to air</span></div>
+            <div class="step-tip"><span>Label every model with client name + date — never mix up orders</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">DIGITIZING</div>
+        <div class="step-title">SCAN THE MODEL</div>
+        <div class="step-desc">Spray stone model with matte scanning spray. Scan with Revopoint MINI 2. Clean up scan in Revopoint software. Export as STL or OBJ file.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Matte scanning spray prevents reflection that confuses the scanner (~$15)</span></div>
+            <div class="step-tip"><span>Use turntable if scanner supports it — more complete capture</span></div>
+            <div class="step-tip"><span>Save scan file as: ClientName_Date_Top/Bottom.stl</span></div>
+            <div class="step-tip"><span>Alternative if no scanner yet: measure model manually and sculpt freehand in Nomad</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">DESIGN — iPAD PRO</div>
+        <div class="step-title">DESIGN IN NOMAD SCULPT</div>
+        <div class="step-desc">Import STL into Nomad Sculpt on iPad Pro. Sculpt grill design over the teeth model. Export as STL when complete. Requires Apple Pencil Pro.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Nomad Sculpt is iOS/iPadOS ONLY — does not run on Mac</span></div>
+            <div class="step-tip"><span>Import client's tooth STL as reference, sculpt grill over it</span></div>
+            <div class="step-tip"><span>Design styles: flooded, open face, fangs, cutouts, textures, diamond dust</span></div>
+            <div class="step-tip"><span>Export as STL — save both the Nomad project file AND the STL</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">PREP — MAC MINI</div>
+        <div class="step-title">SLICE ON MAC MINI</div>
+        <div class="step-desc">Open STL in ELEGOOSlicer or Chitubox (both free, both run on Mac). Add supports, configure castable resin settings. Export .ctb file to Elegoo Mars 5.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Use ELEGOOSlicer or Chitubox — both free, both Mac native, no Windows needed</span></div>
+            <div class="step-tip"><span>Castable resin requires specific exposure settings — check Siraya Tech's recommended settings</span></div>
+            <div class="step-tip"><span>Add supports carefully — avoid placing on visible surfaces</span></div>
+            <div class="step-tip"><span>Transfer .ctb file to printer via USB or SD card</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">6</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">FABRICATION</div>
+        <div class="step-title">PRINT ON ELEGOO MARS 5</div>
+        <div class="step-desc">Print using castable wax resin (Siraya Tech or Elegoo castable). Wash in IPA. UV cure. Inspect for layer issues, thin spots, or print failures.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Use castable resin — not standard resin, it must burn out cleanly for casting</span></div>
+            <div class="step-tip"><span>Wash in IPA for 3–5 minutes, cure under UV lamp for recommended time</span></div>
+            <div class="step-tip"><span>Inspect every print under bright light before sending to caster</span></div>
+            <div class="step-tip"><span>Failed prints: check for delamination, warping, or unsupported areas</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">7</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">PRODUCTION</div>
+        <div class="step-title">SEND TO CASTER</div>
+        <div class="step-desc">Wrap print in tissue, pack tight with no movement, ship with tracking. Email caster before it arrives with metal specs, karat, and finish preferences.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Photograph everything before shipping — for your records and in case of damage</span></div>
+            <div class="step-tip"><span>Always confirm caster accepts resin prints before your first shipment</span></div>
+            <div class="step-tip"><span>Include: metal type, karat, any special finish instructions in your email</span></div>
+            <div class="step-tip"><span>Compare both casters on price, turnaround, and quality before committing to one</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">8</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">RECEIVING</div>
+        <div class="step-title">RECEIVE & CLEAN CASTINGS</div>
+        <div class="step-desc">Inspect raw castings for porosity, sprue marks, surface quality. Remove sprues, file rough areas. Light cleanup and polish for photography.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Surface porosity (tiny holes) is normal — polishing handles most surface issues</span></div>
+            <div class="step-tip"><span>Major defects: photograph and contact caster immediately</span></div>
+            <div class="step-tip"><span>Start with coarser files and work progressively to finer grits</span></div>
+            <div class="step-tip"><span>Be gentle — you cannot put metal back once it is removed</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+    <div class="workflow-step" onclick="toggleStep(this)">
+      <div class="step-num-col">
+        <div class="step-circle">9</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">DELIVERY</div>
+        <div class="step-title">FINISH & DELIVER</div>
+        <div class="step-desc">Now: basic cleanup + client delivery. Future: full in-house polish, stone setting (diamond dust, VVS), and complete finishing before handoff.</div>
+        <div class="step-detail">
+          <div class="step-detail-inner">
+            <div class="step-tip"><span>Current: clean, polish lightly, deliver with remaining balance collected</span></div>
+            <div class="step-tip"><span>Future: rotary polishing tool, polishing compounds, in-house stone setting</span></div>
+            <div class="step-tip"><span>Photograph final piece before delivery — add to portfolio</span></div>
+            <div class="step-tip"><span>Ask client if they want to be featured on Instagram</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-toggle">+</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ EQUIPMENT ═══ -->
+<section id="equipment">
+  <div class="section-header reveal">
+    <div class="section-number">03</div>
+    <div class="section-title-wrap">
+      <div class="section-label">TOOLS OF THE TRADE</div>
+      <h2 class="section-title">GEAR & SOFTWARE</h2>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="gear-section-title">ALREADY OWNED</div>
+    <div class="gear-grid">
+      <div class="gear-card"><span class="gear-status status-have">HAVE IT</span><div class="gear-name">MacBook Air M2</div><div class="gear-cost">Owned</div></div>
+      <div class="gear-card"><span class="gear-status status-have">HAVE IT</span><div class="gear-name">Mac Mini</div><div class="gear-cost">Owned — main slicing hub</div></div>
+      <div class="gear-card"><span class="gear-status status-have">HAVE IT</span><div class="gear-name">Elegoo Mars 5 Resin Printer</div><div class="gear-cost">Owned — 4K Mono LCD</div></div>
+      <div class="gear-card"><span class="gear-status status-have">HAVE IT</span><div class="gear-name">Full Dental Impression Kit</div><div class="gear-cost">Owned — alginate + trays + dental stone</div></div>
+      <div class="gear-card"><span class="gear-status status-have">HAVE IT</span><div class="gear-name">Dental Wax & Tools</div><div class="gear-cost">Owned — traditional wax workflow</div></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:40px">
+    <div class="gear-section-title">BUY NOW — PRIORITY</div>
+    <div class="gear-grid">
+      <div class="gear-card"><span class="gear-status status-buy">BUY NOW</span><div class="gear-name">iPad Pro 11" M4</div><div class="gear-cost">~$999+ — required for Nomad Sculpt</div></div>
+      <div class="gear-card"><span class="gear-status status-buy">BUY NOW</span><div class="gear-name">Apple Pencil Pro</div><div class="gear-cost">~$129 — essential with iPad Pro</div></div>
+      <div class="gear-card"><span class="gear-status status-buy">BUY NOW</span><div class="gear-name">Castable Wax Resin</div><div class="gear-cost">~$40–60 — Siraya Tech or Elegoo brand</div></div>
+      <div class="gear-card"><span class="gear-status status-buy">BUY NOW</span><div class="gear-name">Matte Scanning Spray</div><div class="gear-cost">~$15 — prevents reflections on scan</div></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:40px">
+    <div class="gear-section-title">BUY SOON</div>
+    <div class="gear-grid">
+      <div class="gear-card"><span class="gear-status status-soon">BUY SOON</span><div class="gear-name">Revopoint MINI 2 Scanner</div><div class="gear-cost">~$500 — best for small detail work</div></div>
+      <div class="gear-card"><span class="gear-status status-soon">BUY SOON</span><div class="gear-name">Rotary Polishing Tool</div><div class="gear-cost">~$50–150 — for in-house finishing</div></div>
+      <div class="gear-card"><span class="gear-status status-soon">BUY SOON</span><div class="gear-name">IPA Wash Station</div><div class="gear-cost">~$30–60 — for cleaning prints</div></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:40px">
+    <div class="gear-section-title">SOFTWARE — FREE OR LOW COST</div>
+    <div class="gear-grid">
+      <div class="gear-card"><span class="gear-status status-buy">~$15 ONE-TIME</span><div class="gear-name">Nomad Sculpt</div><div class="gear-cost">App Store — iPad only</div></div>
+      <div class="gear-card"><span class="gear-status status-download">FREE DOWNLOAD</span><div class="gear-name">ELEGOOSlicer</div><div class="gear-cost">elegoo.com — Mac native slicer</div></div>
+      <div class="gear-card"><span class="gear-status status-download">FREE DOWNLOAD</span><div class="gear-name">Chitubox</div><div class="gear-cost">chitubox.com — Mac native slicer</div></div>
+      <div class="gear-card"><span class="gear-status status-download">FREE W/ SCANNER</span><div class="gear-name">Revopoint Software</div><div class="gear-cost">Included — Mac compatible</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCHEDULE ═══ -->
+<section id="schedule">
+  <div class="section-header reveal">
+    <div class="section-number">04</div>
+    <div class="section-title-wrap">
+      <div class="section-label">2–4 HRS / DAY · EVERY DAY</div>
+      <h2 class="section-title">4-WEEK GRIND</h2>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="week-nav">
+      <button class="week-btn wb1 active" onclick="showWeek(1,this)">
+        <span class="week-btn-num">W1</span>
+        <span class="week-btn-label">WARMUP</span>
+      </button>
+      <button class="week-btn wb2" onclick="showWeek(2,this)">
+        <span class="week-btn-num">W2</span>
+        <span class="week-btn-label">REFINE</span>
+      </button>
+      <button class="week-btn wb3" onclick="showWeek(3,this)">
+        <span class="week-btn-num">W3</span>
+        <span class="week-btn-label">CUSTOM</span>
+      </button>
+      <button class="week-btn wb4" onclick="showWeek(4,this)">
+        <span class="week-btn-num">W4</span>
+        <span class="week-btn-label">PORTFOLIO</span>
+      </button>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div class="week-panel active w1" id="wp1">
+      <div class="week-intro">
+        <span class="week-goal-badge">WEEK 1</span>
+        <div>
+          <div class="week-intro-title">WARMUP & FOUNDATIONS</div>
+          <div class="week-intro-desc">Get your hands back in rhythm. Focus on consistency over perfection. Goal: 2 clean stone models poured + wax applied to both.</div>
+        </div>
+      </div>
+      <div class="days-list">
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 1</div><div class="day-title">MONDAY</div><div class="day-focus">SETUP + FIRST IMPRESSION</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOUR 1</div><div class="session-name">Set Up Your Workspace</div><div class="session-text">Lay out all impression materials. Organize trays by size. Mix a small test batch of alginate to check your water ratio before committing a tray.</div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">HOURS 2–3</div><div class="session-name">First Impression — Bottom Arch</div><div class="session-text">Do it on yourself. Mix alginate, load tray, bite down firm and still for 2–3 minutes. Pour dental stone immediately. Let sit 45–60 min to cure.</div><div class="session-tips-block"><p>Don't move while biting — one shift ruins the mold</p><p>Pour stone while alginate is still wet</p></div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">REMAINING TIME</div><div class="session-name">Build Your Reference Folder</div><div class="session-text">Pull up grillz Instagram accounts and Pinterest. Save references for flooded, open face, and fang styles. Know what you're building toward.</div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 2</div><div class="day-title">TUESDAY</div><div class="day-focus">WAX APPLICATION</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOUR 1</div><div class="session-name">Inspect Yesterday's Model</div><div class="session-text">Remove stone model carefully. Check for air bubbles, cracks, or distortion. Note what went well and what to fix next time.</div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">HOURS 2–4</div><div class="session-name">First Flooded Bottom 6</div><div class="session-text">Apply wax to the bottom 6 teeth. Focus on even thickness, clean gumline, smooth surface. This is your benchmark piece — treat it like a paying order.</div><div class="session-tips-block"><p>Keep wax thickness consistent — thin spots crack during casting</p><p>Use dental tools to smooth edges and define the gumline</p></div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 3</div><div class="day-title">WEDNESDAY</div><div class="day-focus">TOP ARCH</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOUR 1</div><div class="session-name">Pour Top Arch Impression</div><div class="session-text">Take a top arch impression. Apply everything learned from Day 1. Focus on a cleaner pour with fewer air bubbles.</div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">HOURS 2–4</div><div class="session-name">Continue Bottom 6 Refinement</div><div class="session-text">Go back to yesterday's wax up. Refine edges, smooth rough areas, and work on the inner channel — the part that sits on the teeth.</div><div class="session-tips-block"><p>The inner channel fit is everything — this determines client comfort</p></div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 4</div><div class="day-title">THURSDAY</div><div class="day-focus">TOP 6 WAX UP</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Flooded Top 6</div><div class="session-text">Apply wax to the top arch. Top teeth have different proportions — wider, flatter. Adjust thickness and gumline accordingly. Photo both pieces side by side when done.</div><div class="session-tips-block"><p>Top front teeth are wider and flatter — don't treat them the same as bottom</p></div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 5</div><div class="day-title">FRIDAY</div><div class="day-focus">OPEN FACE INTRO</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Study Open Face Technique</div><div class="session-text">Watch tutorials on open face wax technique. Note how windows are cut, how edges are finished, what tools are used. Don't touch wax yet — just absorb.</div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">First Open Face Attempt</div><div class="session-text">Take your bottom 6 flooded piece and attempt open face windows. Don't worry about perfection. Focus on clean window edges and consistent frame width.</div><div class="session-tips-block"><p>Cut windows slightly smaller than you think — remove more later if needed</p></div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 6</div><div class="day-title">SATURDAY</div><div class="day-focus">CRITIQUE + REDO</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">HOUR 1</div><div class="session-name">Self Critique Session</div><div class="session-text">Photograph all your wax work from the week. Look critically — where is wax uneven? Where are edges rough? Where does the gumline dip? Write it down.</div></div>
+            <div class="session-divider"></div>
+            <div class="session-block"><div class="session-time-label">HOURS 2–4</div><div class="session-name">Redo Your Weakest Piece</div><div class="session-text">Pick whichever piece had the most issues and redo it from scratch. Redoing is faster than fixing — and teaches more than any tutorial.</div><div class="session-tips-block"><p>Repetition is the skill. Every redo makes the next one cleaner.</p></div></div>
+          </div>
+        </div>
+        <div class="day-row w1" onclick="toggleDay(this)">
+          <div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 7</div><div class="day-title">SUNDAY</div><div class="day-focus">REST + RESEARCH</div><div class="day-chevron">▾</div></div>
+          <div class="day-row-body">
+            <div class="session-block"><div class="session-time-label">LIGHT DAY — 1–2 HRS</div><div class="session-name">Research & Plan Week 2</div><div class="session-text">No wax today. Research open face techniques, cutout ideas, fang designs. Build your inspiration folder. Plan which designs you want to attempt in Week 2.</div><div class="session-tips-block"><p>Rest days are part of the process — come back fresh on Monday</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-panel w2" id="wp2">
+      <div class="week-intro">
+        <span class="week-goal-badge">WEEK 2</span>
+        <div>
+          <div class="week-intro-title">REFINE & REPEAT</div>
+          <div class="week-intro-desc">Build consistency. Every piece this week should be better than last week. Goal: 1 clean flooded set + 1 clean open face set. Contact both casters.</div>
+        </div>
+      </div>
+      <div class="days-list">
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 8</div><div class="day-title">MONDAY</div><div class="day-focus">FRESH IMPRESSIONS + CASTERS</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Pour 2 Fresh Impressions</div><div class="session-text">Take impressions from a friend or family member — different teeth than yours exposes you to different arch sizes and tooth shapes, exactly like client work.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">Contact Both Casters</div><div class="session-text">Reach out to both casters today. Ask: do they accept resin prints, metals available, turnaround, pricing, and how to ship. Get everything in writing.</div><div class="session-tips-block"><p>Ask if they handle spruing themselves or if you need to attach sprues</p><p>Compare both before committing to either</p></div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 9</div><div class="day-title">TUESDAY</div><div class="day-focus">BEST FLOODED YET</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Your Best Flooded Bottom 6</div><div class="session-text">Using the fresh model — make your cleanest flooded bottom 6 yet. Slow down. Focus on every edge. This is a potential portfolio piece. Treat it like it's for a paying client.</div><div class="session-tips-block"><p>Take photos at every stage — before, during, and after</p></div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 10</div><div class="day-title">WEDNESDAY</div><div class="day-focus">OPEN FACE MASTERY</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Clean Open Face Set</div><div class="session-text">Build a full open face bottom 6 from start to finish. Consistent window sizing across all teeth, razor clean frame edges. This should significantly top your Week 1 attempt.</div><div class="session-tips-block"><p>Use a template or guide to keep window sizes consistent tooth to tooth</p></div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 11</div><div class="day-title">THURSDAY</div><div class="day-focus">TOP ARCH OPEN FACE</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Open Face Top 6</div><div class="session-text">Apply open face technique to the top arch. Top teeth behave differently — wider windows, flatter surface. Adjust your approach and document the difference between arches.</div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 12</div><div class="day-title">FRIDAY</div><div class="day-focus">BOTTOM 8 CHALLENGE</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Extend to Bottom 8</div><div class="session-text">Most clients want 8 teeth covered. Practice extending wax to include the two premolars. The transition from front teeth to side teeth is a common weak point — master it.</div><div class="session-tips-block"><p>The side teeth curve — your wax needs to follow the arch, not fight it</p></div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 13</div><div class="day-title">SATURDAY</div><div class="day-focus">PHOTO + SELECT FOR CASTING</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Photograph Your Best Pieces</div><div class="session-text">Clean background, good lighting. Photograph your best wax pieces. These go in your portfolio even before casting.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">Select Pieces to Cast</div><div class="session-text">Pick your 2–3 best pieces across both weeks to send to the caster once pricing is confirmed. Mark them, store safely, don't touch them again.</div></div></div></div>
+        <div class="day-row w2" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 14</div><div class="day-title">SUNDAY</div><div class="day-focus">REST + NOMAD PREP</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">LIGHT DAY</div><div class="session-name">Start Learning Nomad Sculpt</div><div class="session-text">Watch intro Nomad Sculpt tutorials today — basic navigation, sculpting tools, importing STL files. Get familiar before you have the device in hand.</div><div class="session-tips-block"><p>YouTube: search "Nomad Sculpt beginner" — lots of free tutorials</p></div></div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-panel w3" id="wp3">
+      <div class="week-intro">
+        <span class="week-goal-badge">WEEK 3</span>
+        <div>
+          <div class="week-intro-title">CUSTOM DESIGNS</div>
+          <div class="week-intro-desc">Push beyond standard styles. Cutouts, textures, fangs, abstract work. Goal: 1 custom cutout + 1 fang set started. Send pieces to caster.</div>
+        </div>
+      </div>
+      <div class="days-list">
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 15</div><div class="day-title">MONDAY</div><div class="day-focus">CUSTOM CUTOUT</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOUR 1</div><div class="session-name">Sketch Your Cutout Design</div><div class="session-text">On paper first — design a shape to carve into a flooded piece. Stars, hearts, initials, symbols. Keep it simple for the first attempt.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 2–4</div><div class="session-name">Execute the Custom Cutout</div><div class="session-text">Build a flooded piece then carefully carve your custom design — more deliberate and refined than the heart from your early practice. Document every step.</div><div class="session-tips-block"><p>Use the smallest dental tool for detail cuts</p><p>Work under good lighting — shadows hide mistakes</p></div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 16</div><div class="day-title">TUESDAY</div><div class="day-focus">TEXTURE WORK</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Diamond Dust & Abstract Texture</div><div class="session-text">Practice adding surface texture to a flooded piece. Diamond dust effect, geometric patterns, or abstract scoring. Texture adds huge visual interest and perceived value.</div><div class="session-tips-block"><p>Diamond dust is done by pressing a textured surface into soft wax</p><p>Consistent pressure = consistent texture depth</p></div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 17</div><div class="day-title">WEDNESDAY</div><div class="day-focus">FANG RESEARCH</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Deep Dive on Fang Technique</div><div class="session-text">Fangs extend beyond the natural tooth — different build entirely. Study how the extension is constructed, supported, and finished. Watch multiple tutorials before wax.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">Mock Fang Build — No Pressure</div><div class="session-text">First attempt at building fang extensions. Focus on the attachment point where fang meets natural tooth outline. This is the hardest part structurally.</div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 18</div><div class="day-title">THURSDAY</div><div class="day-focus">FULL FANG SET</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Complete Fang Set</div><div class="session-text">Build a full fang set — both canines extended. Focus on symmetry, consistent length, and smooth taper from base to tip.</div><div class="session-tips-block"><p>Measure fang length on both sides before finishing — asymmetry is very noticeable</p><p>Fangs need enough thickness at the base to survive casting</p></div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 19</div><div class="day-title">FRIDAY</div><div class="day-focus">COMBINED DESIGN</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Open Face + Custom Detail</div><div class="session-text">Combine two techniques in one piece — open face frame with a custom detail element. Cutout, texture, or engraving. This is a real sellable design concept.</div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 20</div><div class="day-title">SATURDAY</div><div class="day-focus">SEND TO CASTER</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Final Piece Selection</div><div class="session-text">Select your best 2–3 pieces across all weeks. Inspect for thin spots, cracks, or incomplete areas before shipping. These represent Noire Grillz.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">Pack & Ship</div><div class="session-text">Wrap individually in tissue, pack snug, ship with tracking. Email caster your metal preferences before the package arrives.</div><div class="session-tips-block"><p>Photograph everything before shipping — your records and proof of condition</p></div></div></div></div>
+        <div class="day-row w3" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 21</div><div class="day-title">SUNDAY</div><div class="day-focus">REST + NOMAD</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">LIGHT DAY</div><div class="session-name">Nomad Sculpt Exploration</div><div class="session-text">If your iPad has arrived — spend today getting comfortable in Nomad. No pressure to make anything good. Just explore tools, sculpt random shapes, feel the Apple Pencil.</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-panel w4" id="wp4">
+      <div class="week-intro">
+        <span class="week-goal-badge">WEEK 4</span>
+        <div>
+          <div class="week-intro-title">PORTFOLIO READY</div>
+          <div class="week-intro-desc">Castings arrive. Polish, photograph, post, open orders. Goal: real metal pieces in your portfolio and first clients lined up.</div>
+        </div>
+      </div>
+      <div class="days-list">
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 22</div><div class="day-title">MONDAY</div><div class="day-focus">RECEIVE CASTINGS</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">WHEN THEY ARRIVE</div><div class="session-name">Inspect Raw Castings</div><div class="session-text">Examine every piece carefully. Note casting quality, surface defects, porosity. This feedback shapes your relationship with the caster going forward.</div><div class="session-tips-block"><p>Porosity (tiny holes) is normal — polishing handles surface issues</p><p>Major defects: contact caster immediately with photos</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 23</div><div class="day-title">TUESDAY</div><div class="day-focus">BASIC CLEANUP</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Clean Up Raw Castings</div><div class="session-text">Remove sprue marks, file rough edges, basic cleanup on each piece. Not final polish yet — getting pieces presentable for photography stage.</div><div class="session-tips-block"><p>Start coarse, work to finer grits progressively</p><p>Be gentle — you cannot add metal back</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 24</div><div class="day-title">WEDNESDAY</div><div class="day-focus">POLISH</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Polish Your Best Piece</div><div class="session-text">Bring one piece to high shine for your hero portfolio photo. Work through polishing compounds progressively. This piece IS Noire Grillz — make it shine.</div><div class="session-tips-block"><p>A rotary tool with polishing wheel speeds this up significantly</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 25</div><div class="day-title">THURSDAY</div><div class="day-focus">PHOTO SHOOT</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–2</div><div class="session-name">Set Up Your Shot</div><div class="session-text">Black velvet background, macro lens or iPhone portrait mode, natural window light or ring light. Clean every piece with a soft cloth before shooting.</div></div><div class="session-divider"></div><div class="session-block"><div class="session-time-label">HOURS 3–4</div><div class="session-name">Shoot All Portfolio Pieces</div><div class="session-text">Multiple angles, closeups of details, and on-model shots if possible. These go on Instagram, your website, and your order form.</div><div class="session-tips-block"><p>On-model (in-mouth) shots always perform best on social media</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 26</div><div class="day-title">FRIDAY</div><div class="day-focus">LAUNCH</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">Post + Open Orders</div><div class="session-text">Edit your best photos, post to Instagram, announce Noire Grillz is taking orders. Update order form with finalized deposit amount and pricing.</div><div class="session-tips-block"><p>Don't wait until everything is perfect — done is better than perfect when launching</p><p>First clients will come from people who already know you</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 27</div><div class="day-title">SATURDAY</div><div class="day-focus">NOMAD SCULPT</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">HOURS 1–4</div><div class="session-name">First Digital Grill Design</div><div class="session-text">In Nomad Sculpt — attempt your first digital grill. Search "teeth STL free download" for a practice model. Sculpt a basic flooded set over it.</div><div class="session-tips-block"><p>Don't compare digital to physical yet — different skills, same destination</p></div></div></div></div>
+        <div class="day-row w4" onclick="toggleDay(this)"><div class="day-row-header"><div class="day-pip"></div><div class="day-num">DAY 28</div><div class="day-title">SUNDAY</div><div class="day-focus">REFLECT + PLAN</div><div class="day-chevron">▾</div></div><div class="day-row-body"><div class="session-block"><div class="session-time-label">LIGHT DAY</div><div class="session-name">Review the 4 Weeks 🔥</div><div class="session-text">Look back at Day 1 vs now. What improved? What still needs work? Write your top 3 strengths and top 3 areas to keep developing. This becomes your Month 2 focus. Real metal pieces. Portfolio live. Orders open. Digital workflow started. Noire Grillz is moving.</div></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUSINESS ═══ -->
+<section id="business">
+  <div class="section-header reveal">
+    <div class="section-number">05</div>
+    <div class="section-title-wrap">
+      <div class="section-label">OPERATIONS</div>
+      <h2 class="section-title">BUSINESS SETUP</h2>
+    </div>
+  </div>
+  <div class="business-grid reveal">
+    <div class="biz-card">
+      <div class="biz-card-num">01</div>
+      <span class="biz-icon">📋</span>
+      <div class="biz-title">ORDER FORM</div>
+      <ul class="biz-list">
+        <li>Skull logo ✓, Name, Email, Metal choice ✓</li>
+        <li>Design options: Fangs, Diamond Dust, Abstract, Open Face ✓</li>
+        <li>Teeth diagram for marking coverage ✓</li>
+        <li>Add phone number field</li>
+        <li>Fill in deposit amount (recommended 50%)</li>
+        <li>Add reference photo upload option</li>
+      </ul>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-num">02</div>
+      <span class="biz-icon">💰</span>
+      <div class="biz-title">PRICING STRUCTURE</div>
+      <ul class="biz-list">
+        <li>Base cost = resin + casting + labor + markup</li>
+        <li>Flooded 6: metal weight × casting rate + margin</li>
+        <li>Open face: base + design premium</li>
+        <li>Fangs: base + fang extension premium</li>
+        <li>Diamond dust / custom: base + custom premium</li>
+        <li>10k &lt; 14k &lt; 18k — price each karat accordingly</li>
+      </ul>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-num">03</div>
+      <span class="biz-icon">💳</span>
+      <div class="biz-title">PAYMENTS</div>
+      <ul class="biz-list">
+        <li>Set up Cash App, Zelle, or Square before first order</li>
+        <li>50% deposit at order — non-refundable</li>
+        <li>Remaining 50% before delivery</li>
+        <li>All sales final — already on your order form</li>
+        <li>Never start work without deposit in hand</li>
+      </ul>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-num">04</div>
+      <span class="biz-icon">📸</span>
+      <div class="biz-title">PORTFOLIO & MARKETING</div>
+      <ul class="biz-list">
+        <li>Cast best practice wax pieces for real metal portfolio photos</li>
+        <li>On-model (in-mouth) shots perform best on Instagram</li>
+        <li>Black velvet background + ring light or window light</li>
+        <li>Post consistently — first clients come from your network</li>
+        <li>Always ask: "Want to be featured on Instagram?"</li>
+      </ul>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-num">05</div>
+      <span class="biz-icon">🤝</span>
+      <div class="biz-title">CASTER CHECKLIST</div>
+      <ul class="biz-list">
+        <li>Do you accept castable resin prints?</li>
+        <li>Metals available: 10k, 14k, 18k, silver, rose gold?</li>
+        <li>Pricing per gram or per piece by metal?</li>
+        <li>Standard turnaround time?</li>
+        <li>Do you handle spruing?</li>
+        <li>How to pack and ship resin prints?</li>
+      </ul>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-num">06</div>
+      <span class="biz-icon">⚠️</span>
+      <div class="biz-title">TECH NOTES</div>
+      <ul class="biz-list">
+        <li>Nomad Sculpt = iOS only. Does NOT run on Mac.</li>
+        <li>Elegoo Mars 5 = resin PRINTER, not CAD software</li>
+        <li>ELEGOOSlicer + Chitubox = free, Mac native</li>
+        <li>No Windows machine needed for this workflow</li>
+        <li>Export from Nomad as STL for printing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROADMAP ═══ -->
+<section id="roadmap">
+  <div class="section-header reveal">
+    <div class="section-number">06</div>
+    <div class="section-title-wrap">
+      <div class="section-label">THE LONG GAME</div>
+      <h2 class="section-title">SCALING ROADMAP</h2>
+    </div>
+  </div>
+  <div class="roadmap-phases reveal">
+    <div class="phase-card phase-1">
+      <div class="phase-header">
+        <div class="phase-label">PHASE 1</div>
+        <div class="phase-title">FOUNDATION</div>
+        <div class="phase-time">Months 1–3</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><div class="phase-dot"></div><span>Master traditional wax fabrication</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Build metal portfolio from casted practice pieces</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Take first paying orders via wax workflow</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Learn Nomad Sculpt digital workflow in parallel</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Confirm caster partnerships and pricing</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Set pricing structure and fill out order form</span></div>
+      </div>
+    </div>
+    <div class="phase-card phase-2">
+      <div class="phase-header">
+        <div class="phase-label">PHASE 2</div>
+        <div class="phase-title">BUILDING</div>
+        <div class="phase-time">Months 3–6</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><div class="phase-dot"></div><span>Integrate full digital workflow — Nomad → Mars 5 → cast</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Add 3D scanner for impression-to-digital pipeline</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Grow Instagram portfolio with consistent posting</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Begin polishing castings in-house</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Refine pricing, order process, and turnaround time</span></div>
+      </div>
+    </div>
+    <div class="phase-card phase-3">
+      <div class="phase-header">
+        <div class="phase-label">PHASE 3</div>
+        <div class="phase-title">FULL IN-HOUSE</div>
+        <div class="phase-time">6–12 Months</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item"><div class="phase-dot"></div><span>Learn stone setting — diamond dust, VVS, custom work</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Explore bringing casting in-house long term</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Expand to full mouth, matching top + bottom sets</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Explore wholesale or bulk order clients</span></div>
+        <div class="phase-item"><div class="phase-dot"></div><span>Consider hiring help for volume production</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">NOIRE GRILLZ</div>
+  <div class="footer-tag">From impression to gold — built different.</div>
+  <div class="footer-mono">INTERNAL REFERENCE v1.0</div>
+</footer>
+
+<script>
+// Step toggle
+function toggleStep(el) {
+  const detail = el.querySelector('.step-detail');
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.workflow-step').forEach(s => {
+    s.classList.remove('open');
+    s.querySelector('.step-detail').classList.remove('open');
+  });
+  if (!isOpen) {
+    el.classList.add('open');
+    detail.classList.add('open');
+  }
+}
+
+// Day toggle
+function toggleDay(el) {
+  el.classList.toggle('open');
+}
+
+// Week switcher
+function showWeek(n, btn) {
+  document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('wp' + n).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+});
+</script>
+</body>
+</html>
